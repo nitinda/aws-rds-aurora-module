@@ -12,8 +12,8 @@ resource "aws_rds_cluster" "rds_cluster" {
   backup_retention_period             = var.backup_retention_period
   port                                = var.port
   apply_immediately                   = var.apply_immediately
-  db_subnet_group_name                = var.db_subnet_group_name == null ? join("", aws_db_subnet_group.db_subnet_group.*.name) : var.db_subnet_group_name
-  db_cluster_parameter_group_name     = var.rds_cluster_parameter_group_name == null ? join("", aws_db_subnet_group.db_subnet_group.*.name) : var.rds_cluster_parameter_group_name
+  db_subnet_group_name                = local.db_subnet_group_name
+  db_cluster_parameter_group_name     = local.db_cluster_parameter_group_name
   vpc_security_group_ids              = var.vpc_security_group_ids
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   kms_key_id                          = var.kms_key_id
@@ -46,4 +46,9 @@ resource "aws_rds_cluster" "rds_cluster" {
     update = lookup(var.cluster_timeouts, "update", null)
     delete = lookup(var.cluster_timeouts, "delete", null)
   }
+}
+
+locals {
+  db_cluster_parameter_group_name = var.db_cluster_parameter_group_name == null ? join("",aws_rds_cluster_parameter_group.rds_cluster_parameter_group.*.name) : var.db_cluster_parameter_group_name
+  db_subnet_group_name            = var.db_cluster_subnet_group_name == null ? join("",aws_db_subnet_group.db_subnet_group.*.name) : var.db_cluster_subnet_group_name
 }
