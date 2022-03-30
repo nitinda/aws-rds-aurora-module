@@ -28,7 +28,6 @@ variable "apply_immediately" {
 
 variable "backup_retention_period" {
   description = "The days to retain backups for. Default 1"
-  type        = number
   default     = 1
 }
 
@@ -56,17 +55,17 @@ variable "database_name" {
   default     = null
 }
 
-// variable "db_cluster_parameter_group_name" {
-//   description = "A cluster parameter group to associate with the cluster."
-//   type        = string
-//   default     = null
-// }
+variable "db_cluster_parameter_group_name" {
+  description = "A cluster parameter group to associate with the cluster."
+  type        = string
+  default     = null
+}
 
-// variable "db_cluster_subnet_group_name" {
-//   description = "A DB subnet group to associate with this DB instance"
-//   type        = string
-//   default     = null
-// }
+variable "db_cluster_subnet_group_name" {
+  description = "A DB subnet group to associate with this DB instance"
+  type        = string
+  default     = null
+}
 
 variable "enabled_cloudwatch_logs_exports" {
   description = "List of log types to export to cloudwatch"
