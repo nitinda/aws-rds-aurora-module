@@ -222,6 +222,8 @@ _The variables required in order for the module to be successfully called from t
 | **_cluster\_identifier_** | _Creates a unique cluster identifier beginning with the specified prefix_ | _string_ | **_Optional_** | **_null_** |
 | **_copy\_tags\_to\_snapshot_** | _Copy all Cluster tags to snapshots._ | _bool_ | **_Optional_** | **_false_** |
 | **_database\_name_** | _"Name for an automatically created database on cluster creation._ | _string_ | **_Optional_** | **_null_** |
+| **_db\_cluster\_parameter\_group\_name_** | _"A cluster parameter group to associate with the cluster. Use existing group._ | _string_ | **_Optional_** | **_null_** |
+| **_db\_cluster\_subnet\_group\_name_** | _"A DB subnet group to associate with this DB instance. Use existing group._ | _string_ | **_Optional_** | **_null_** |
 | **_enabled\_cloudwatch\_logs\_exports_** | _List of log types to export to cloudwatch_ | _list(string)_ | **_Optional_** | **_[]_** |
 | **_engine_** | _The name of the database engine to be used for this DB cluster._ | _string_ | **_Optional_** | **_aurora_** |
 | **_engine\_mode_** | _The database engine mode._ | _string_ | **_Optional_** | **_provisioned_** |
