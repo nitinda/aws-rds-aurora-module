@@ -18,6 +18,7 @@ resource "aws_rds_cluster" "rds_cluster" {
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   kms_key_id                          = var.kms_key_id
   enabled_cloudwatch_logs_exports     = var.enabled_cloudwatch_logs_exports
+  copy_tags_to_snapshot               = var.copy_tags_to_snapshot
 
   dynamic "scaling_configuration" {
     for_each = var.scaling_configuration == {} ? [] : [var.scaling_configuration]
@@ -49,6 +50,6 @@ resource "aws_rds_cluster" "rds_cluster" {
 }
 
 locals {
-  db_cluster_parameter_group_name = var.db_cluster_parameter_group_name == null ? join("",aws_rds_cluster_parameter_group.rds_cluster_parameter_group.*.name) : var.db_cluster_parameter_group_name
-  db_subnet_group_name            = var.db_cluster_subnet_group_name == null ? join("",aws_db_subnet_group.db_subnet_group.*.name) : var.db_cluster_subnet_group_name
+  db_cluster_parameter_group_name = var.db_cluster_parameter_group_name == null ? join("", aws_rds_cluster_parameter_group.rds_cluster_parameter_group.*.name) : var.db_cluster_parameter_group_name
+  db_subnet_group_name            = var.db_cluster_subnet_group_name == null ? join("", aws_db_subnet_group.db_subnet_group.*.name) : var.db_cluster_subnet_group_name
 }
