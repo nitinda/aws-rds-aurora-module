@@ -4,6 +4,7 @@ variable "prefix" {
   default     = "ohmp"
 }
 
+### RDS Cluster
 variable "cluster_timeouts" {
   description = "Create, update, and delete timeout configurations for the cluster"
   type        = map(string)
@@ -149,10 +150,7 @@ variable "vpc_security_group_ids" {
   default     = []
 }
 
-
-
-####### RDS Parameter Group
-
+####### RDS Cluster Parameter Group
 variable "rds_cluster_parameter_group_name" {
   description = "The name of the DB cluster parameter group."
   default     = null
@@ -180,9 +178,8 @@ variable "rds_cluster_parameter_group_family" {
 variable "rds_cluster_parameter_group_parameter" {
   description = "A list of DB parameters to apply."
   type        = any
-  default     = {}
+  default     = []
 }
-
 
 ####### DB Subnet Group
 variable "db_subnet_group_name" {
@@ -207,4 +204,78 @@ variable "db_subnet_group_subnet_ids" {
   description = "A list of VPC subnet IDs."
   type        = list(string)
   default     = []
+}
+
+####### DB Parameter Group
+variable "db_parameter_group_name" {
+  description = "The name of the DB cluster parameter group."
+  default     = null
+  type        = string
+}
+
+variable "db_parameter_group_name_prefix" {
+  description = "Creates a unique name beginning with the specified prefix."
+  default     = null
+  type        = string
+}
+
+variable "db_parameter_group_family" {
+  description = "The family of the DB cluster parameter group."
+  default     = null
+  type        = string
+}
+
+variable "db_parameter_group_description" {
+  description = "The description of the DB parameter group."
+  default     = "Managed by Terraform"
+  type        = string
+}
+
+variable "db_parameter_group_parameter" {
+  description = "A list of DB parameters to apply. Note that parameters may differ from a family to an other."
+  type        = any
+  default     = []
+}
+
+####### RDS Cluster Instance
+variable "rds_cluster_instance_identifier" {
+  description = "The identifier for the RDS instance."
+  type        = string
+  default     = null
+}
+
+variable "rds_cluster_instance_identifier_prefix" {
+  description = "Creates a unique identifier beginning with the specified prefix."
+  type        = string
+  default     = null
+}
+
+variable "rds_cluster_instance_cluster_identifier" {
+  description = "The identifier of the cluster in which to launch this instance."
+  type        = string
+  default     = null
+}
+
+variable "rds_cluster_instance_instance_class" {
+  description = "The instance class to use. For details on CPU and memory."
+  type        = string
+  default     = "db.t3.medium"
+}
+
+variable "rds_cluster_instance_performance_insights_enabled" {
+  description = "Specifies whether Performance Insights is enabled or not."
+  type        = bool
+  default     = false
+}
+
+variable "rds_cluster_instance_performance_insights_kms_key_id" {
+  description = "ARN for the KMS key to encrypt Performance Insights data."
+  type        = string
+  default     = null
+}
+
+variable "rds_cluster_instance_performance_insights_retention_period" {
+  description = "Amount of time in days to retain Performance Insights data."
+  type        = number
+  default     = 7
 }
