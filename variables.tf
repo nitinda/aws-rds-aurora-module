@@ -56,13 +56,13 @@ variable "database_name" {
   default     = null
 }
 
-variable "db_cluster_parameter_group_name" {
+variable "rds_cluster_db_parameter_group_name" {
   description = "A cluster parameter group to associate with the cluster."
   type        = string
   default     = null
 }
 
-variable "db_cluster_subnet_group_name" {
+variable "rds_cluster_db_subnet_group_name" {
   description = "A DB subnet group to associate with this DB instance"
   type        = string
   default     = null
@@ -260,6 +260,12 @@ variable "rds_cluster_instance_instance_class" {
   description = "The instance class to use. For details on CPU and memory."
   type        = string
   default     = "db.t3.medium"
+}
+
+variable "rds_cluster_instance_db_parameter_group_name" {
+  description = "The name of the DB cluster instance parameter group."
+  default     = null
+  type        = string
 }
 
 variable "rds_cluster_instance_performance_insights_enabled" {
