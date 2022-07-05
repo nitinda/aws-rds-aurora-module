@@ -1,14 +1,14 @@
 resource "aws_rds_cluster_instance" "rds_cluster_instance" {
   count              = var.engine_mode == "serverless" ? 0 : 2
   identifier         = var.rds_cluster_instance_identifier == null ? null : "${var.rds_cluster_instance_identifier}-${count.index}"
-  identifier_prefix  = var.rds_cluster_instance_identifier_prefix == null ? null : "${var.rds_cluster_instance_identifier_prefix}-${count.index}-"
+  identifier_prefix  = var.rds_cluster_instance_identifier_prefix == null ? null : "${var.rds_cluster_instance_identifier_prefix}-${count.index}"
   cluster_identifier = var.rds_cluster_instance_cluster_identifier == null ? aws_rds_cluster.rds_cluster.id : var.rds_cluster_instance_cluster_identifier
   instance_class     = var.rds_cluster_instance_instance_class
   engine             = aws_rds_cluster.rds_cluster.engine
   engine_version     = aws_rds_cluster.rds_cluster.engine_version
   #   publicly_accessible                   = var.rds_cluster_instance_publicly_accessible
-  #   db_subnet_group_name                  = local.db_subnet_group_name
-  #   db_parameter_group_name               = var.rds_cluster_instance_db_parameter_group_name
+    db_subnet_group_name                  = local.rds_cluster_db_subnet_group_name
+    db_parameter_group_name               = local.rds_cluster_instance_db_parameter_group_name
   apply_immediately = aws_rds_cluster.rds_cluster.apply_immediately
   #   monitoring_role_arn                   = var.rds_cluster_instance_monitoring_role_arn
   #   monitoring_interval                   = var.rds_cluster_instance_monitoring_interval
